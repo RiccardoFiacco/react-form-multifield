@@ -33,7 +33,7 @@ export default function Main() {
       console.log('vuoto uno dei due')
       return
     }
-    //tramite set do i valori alla variabile reattiva che è un oggetto in questo caso
+    //creo una variabile di appoggio dove andro a mettere i valori che ho preso dal form
     const newPost = {
       id: posts.length + 1,
       title : formData.title,
