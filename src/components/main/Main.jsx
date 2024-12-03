@@ -18,7 +18,10 @@ export default function Main() {
   const [formData, setFormData] = useState(basePost) //creiamo una varibile statica che ha come valore iniziale l'oggetto creato sopra
   const [posts, setPosts] = useState(originalPosts)
   
-
+  function changeHandler(event){
+    event.preventDefault();
+    console.log("cambio uno dei due")
+  }
   function onSubmit(event){
     event.preventDefault();
     //controllo se i campi non sono vuoti
@@ -38,8 +41,6 @@ export default function Main() {
     }
   
     setPosts([...posts, newPost])//con set new arr vado a creare un array con i vecchi post piu quello nuovo
-    SetTitle('') //azzero i campi di input
-    SetText('')
   }
 
   function deletePost(postToDelete){
@@ -60,8 +61,8 @@ export default function Main() {
     <div className={[style.bgcolor_lightGrey, style.flex_grow_1].join(" ")}>
       <Container>
           <form className="row column-gap-3" onSubmit ={onSubmit} action="">
-            <input onChange={(e)=>SetTitle(e.target.value)} type="text" className="col-3" value={title} placeholder="inserisci titolo"></input>
-            <input onChange={(e)=>SetText(e.target.value)} type="text" className="col-3" value={text} placeholder="inserisci testo"></input>
+            <input onChange={(e)=>changeHandler(e)} type="text" className="col-3" value={formData.title} placeholder="inserisci titolo"></input>
+            <input onChange={(e)=>changeHandler(e)} type="text" className="col-3" value={formData.content} placeholder="inserisci testo"></input>
             <input type="submit" className="col-1"></input>
           </form>
         <Row
