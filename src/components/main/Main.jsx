@@ -13,13 +13,13 @@ let basePost = { //creiamo una variabile statica che ci servira da base per gli 
   tags: [],
   published: false,
 }
-
+let arr = []
 export default function Main() {
   const [formData, setFormData] = useState(basePost) //creiamo una varibile statica che ha come valore iniziale l'oggetto creato sopra
   const [posts, setPosts] = useState(originalPosts)
-
   const [status, setStatus] = useState(false)
-
+  const [arrayChecked, setArrayChecked] = useState([])
+  const [checkedValue, setCheckedValue] = useState("")
   //funzione che mi aggiorna i valori del form data al cambio degli input
   function changeHandler(event){
     //creo una variabile per il valore da mettere nell'oggetto, se l'elemento che ha scatenato l'evento è  di tipo checkbox 
@@ -46,12 +46,14 @@ export default function Main() {
     const newPost = {
       id: posts.length + 1,
       ...formData,//uso lo spread operator per mettere i valori di form data dentro al nuovo post
-      tags: formData.tags.split(' '),
+      tags: arrayChecked,
     }
   
     setPosts([...posts, newPost])//con set new arr vado a creare un array con i vecchi post piu quello nuovo
     setFormData(basePost)//riazzero i campi
     setStatus(false)
+    setArrayChecked([])
+    arr = []
   }
 
   function deletePost(postToDelete){ //function per eliminare un post
@@ -65,12 +67,16 @@ export default function Main() {
           postToChange.title = newTitle
       }
     })
-    console.log(posts)
     setPosts([...posts]) //setto la variabile posts con il nuovo post
   }
-
-  function changeTagsArray(){
-    console.log("aldo, giovanni e giacomo")
+  
+  function changeTagsArray(event){
+    setCheckedValue(event.target.id)
+    if(checkedValue !== "" && !arr.includes(checkedValue)){
+      arr.push(checkedValue)
+    }
+    setArrayChecked(arr);
+    console.log(arrayChecked)
   }
 
   useEffect(() => {
@@ -95,19 +101,19 @@ export default function Main() {
             </div>
           <div className="row">
           <div className="col-1">
-                <input onChange={changeTagsArray} checked={formData.published} type="checkbox" name='tags'className="btn-check" id="html" autoComplete="off"/>
+                <input onChange={changeTagsArray} checked={checkedValue} type="checkbox" name='tags'className="btn-check" id="html" autoComplete="off"/>
                 <label className="btn btn-outline-primary" htmlFor="html">html</label>
             </div>
               <div className="col-1">
-                  <input onChange={changeTagsArray} checked={formData.published} type="checkbox" name='tags'className="btn-check" id="css" autoComplete="off"/>
+                  <input onChange={changeTagsArray} checked={checkedValue} type="checkbox" name='tags'className="btn-check" id="css" autoComplete="off"/>
                   <label className="btn btn-outline-primary" htmlFor="css">css</label>
               </div>
               <div className="col-1">
-                  <input onChange={changeTagsArray} checked={formData.published} type="checkbox" name='tags'className="btn-check" id="js" autoComplete="off"/>
+                  <input onChange={changeTagsArray} checked={checkedValue} type="checkbox" name='tags'className="btn-check" id="js" autoComplete="off"/>
                   <label className="btn btn-outline-primary" htmlFor="js">js</label>
               </div>
               <div className="col-1">
-                  <input type="checkbox" onChange={changeTagsArray} checked={formData.published} name='tags' id="php"className="btn-check" />
+                  <input type="checkbox" onChange={changeTagsArray} checked={checkedValue} name='tags' id="php"className="btn-check" />
                   <label className="btn btn-outline-primary" htmlFor="php">php</label>
               </div>
             </div>  
