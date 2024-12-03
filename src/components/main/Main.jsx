@@ -20,12 +20,12 @@ export default function Main() {
   //funzione che mi aggiorna i valori del form data al cambio degli input
   function changeHandler(event){
     event.preventDefault();
-    setFormData((formData)=>{
-      return {...formData, 
-        [event.target.name]:event.target.value}
+    setFormData((formData)=>{ //passo una callback alla funzione set che ha come parametro la variabile reattiva
+      return {...formData, //ritornera un oggetto copia di form data
+        [event.target.name]:event.target.value} //ma che avra una key presa dal name dell elemento che ha scatenato l'evento con il rispettivo valore come value
     })
   }
-  
+
   function onSubmit(event){
     event.preventDefault();
     //controllo se i campi non sono vuoti
