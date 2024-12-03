@@ -20,6 +20,7 @@ export default function Main() {
   //funzione che mi aggiorna i valori del form data al cambio degli input
   function changeHandler(event){
     event.preventDefault();
+    console.log("cliccato")
     setFormData((formData)=>{ //passo una callback alla funzione set che ha come parametro la variabile reattiva
       return {...formData, //ritornera un oggetto copia di form data
         [event.target.name]:event.target.value} //ma che avra una key presa dal name dell elemento che ha scatenato l'evento con il rispettivo valore come value
@@ -63,20 +64,35 @@ export default function Main() {
   return (
     <div className={[style.bgcolor_lightGrey, style.flex_grow_1].join(" ")}>
       <Container>
-          <form className="row column-gap-3" onSubmit ={onSubmit} action="">
+          <form className="row column-gap-3 row-gap-3" onSubmit ={onSubmit} action="">
             {/* vado a mettere nei campi di input la funzione da invocare al cambio dell'input e come valore il valore della variabile reattiva*/}
             <input onChange={(e)=>changeHandler(e)} type="text" className="col-1" name="title" value={formData.title} placeholder="inserisci titolo"></input> 
             <input onChange={(e)=>changeHandler(e)} type="text" className="col-1" name="content" value={formData.content} placeholder="inserisci testo"></input>
             <input onChange={(e)=>changeHandler(e)} type="text" className="col-1" name="image" value={formData.image} placeholder="inserisci url imagine"></input>
             
-            
+            <div className="col-1">
+                <input onChange={changeHandler} checked={formData.published} type="checkbox" className="btn-check" id="html" autoComplete="off"/>
+                <label className="btn btn-outline-primary" htmlFor="html">html</label>
+            </div>
+            <div className="col-1">
+                <input onChange={changeHandler} checked={formData.published} type="checkbox" className="btn-check" id="css" autoComplete="off"/>
+                <label className="btn btn-outline-primary" htmlFor="css">css</label>
+            </div>
+            <div className="col-1">
+                <input onChange={changeHandler} checked={formData.published} type="checkbox" className="btn-check" id="js" autoComplete="off"/>
+                <label className="btn btn-outline-primary" htmlFor="js">js</label>
+            </div>
+            <div className="col-1">
+                <input type="checkbox" onChange={(e)=>changeHandler(e)} checked={formData.published} id="php"className="btn-check" />
+                <label className="btn btn-outline-primary" htmlFor="php">php</label>
+            </div> 
+              
             <input type="submit" className="col-1"></input>
           </form>
         <Row
           className={[style.justify_center,style.align_center,style.padding_top_50,]}
         >
           {posts.map((el) => {
-            console.log("renderizzo")
             return (
               el.published && (
                 <PostCard
