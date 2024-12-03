@@ -5,7 +5,7 @@ import { PostCard } from "./PostCard.jsx";
 import { useState } from "react";
 import gto from "../../assets/gto2.jpg"
 
-let basePost = {
+let basePost = { //creiamo una variabile statica che ci servira da base per gli inserimenti
   id: 0,
   title : '',
   image : '',
@@ -15,8 +15,7 @@ let basePost = {
 }
 
 export default function Main() {
-  const [title, SetTitle] = useState('')
-  const [text, SetText] = useState('')
+  const [formData, setFormData] = useState(basePost) //creiamo una varibile statica che ha come valore iniziale l'oggetto creato sopra
   const [posts, setPosts] = useState(originalPosts)
   
 
