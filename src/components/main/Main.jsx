@@ -37,7 +37,7 @@ export default function Main() {
     const newPost = {
       id: posts.length + 1,
       title : formData.title,
-      image : gto,
+      image : formData.image,
       content: formData.content,
       tags: createArr(lenguage),
       published: true,
@@ -65,8 +65,11 @@ export default function Main() {
       <Container>
           <form className="row column-gap-3" onSubmit ={onSubmit} action="">
             {/* vado a mettere nei campi di input la funzione da invocare al cambio dell'input e come valore il valore della variabile reattiva*/}
-            <input onChange={(e)=>changeHandler(e)} type="text" className="col-3" name="title" value={formData.title} placeholder="inserisci titolo"></input> 
-            <input onChange={(e)=>changeHandler(e)} type="text" className="col-3" name="content" value={formData.content} placeholder="inserisci testo"></input>
+            <input onChange={(e)=>changeHandler(e)} type="text" className="col-1" name="title" value={formData.title} placeholder="inserisci titolo"></input> 
+            <input onChange={(e)=>changeHandler(e)} type="text" className="col-1" name="content" value={formData.content} placeholder="inserisci testo"></input>
+            <input onChange={(e)=>changeHandler(e)} type="text" className="col-1" name="image" value={formData.image} placeholder="inserisci url imagine"></input>
+            
+            
             <input type="submit" className="col-1"></input>
           </form>
         <Row
