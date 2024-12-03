@@ -4,12 +4,21 @@ import { posts as originalPosts, createArr, lenguage } from "../../posts.js";
 import { PostCard } from "./PostCard.jsx";
 import { useState } from "react";
 import gto from "../../assets/gto2.jpg"
- 
+
+let basePost = {
+  id: 0,
+  title : '',
+  image : '',
+  content: '',
+  tags: '',
+  published: false,
+}
+
 export default function Main() {
   const [title, SetTitle] = useState('')
   const [text, SetText] = useState('')
   const [posts, setPosts] = useState(originalPosts)
-  //const [newPost, SetNewPosts] = useState({})
+  
 
   function onSubmit(event){
     event.preventDefault();
