@@ -20,8 +20,12 @@ export default function Main() {
   //funzione che mi aggiorna i valori del form data al cambio degli input
   function changeHandler(event){
     event.preventDefault();
-    console.log("cambio uno dei due")
+    setFormData((formData)=>{
+      return {...formData, 
+        [event.target.name]:event.target.value}
+    })
   }
+  
   function onSubmit(event){
     event.preventDefault();
     //controllo se i campi non sono vuoti
@@ -62,8 +66,8 @@ export default function Main() {
       <Container>
           <form className="row column-gap-3" onSubmit ={onSubmit} action="">
             {/* vado a mettere nei campi di input la funzione da invocare al cambio dell'input e come valore il valore della variabile reattiva*/}
-            <input onChange={(e)=>changeHandler(e)} type="text" className="col-3" value={formData.title} placeholder="inserisci titolo"></input> 
-            <input onChange={(e)=>changeHandler(e)} type="text" className="col-3" value={formData.content} placeholder="inserisci testo"></input>
+            <input onChange={(e)=>changeHandler(e)} type="text" className="col-3" name="title" value={formData.title} placeholder="inserisci titolo"></input> 
+            <input onChange={(e)=>changeHandler(e)} type="text" className="col-3" name="content" value={formData.content} placeholder="inserisci testo"></input>
             <input type="submit" className="col-1"></input>
           </form>
         <Row
