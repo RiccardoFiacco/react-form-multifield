@@ -29,17 +29,16 @@ export default function Main() {
   function onSubmit(event){
     event.preventDefault();
     //controllo se i campi non sono vuoti
-
-    if(title === '' && text === ''){
+    if(formData.title === '' && formData.content === ''){
       console.log('vuoto uno dei due')
       return
     }
     //tramite set do i valori alla variabile reattiva che è un oggetto in questo caso
     const newPost = {
       id: posts.length + 1,
-      title : title,
+      title : formData.title,
       image : gto,
-      content: text,
+      content: formData.content,
       tags: createArr(lenguage),
       published: true,
     }
