@@ -40,8 +40,16 @@ export function PostCard(props) {
            
           </p>
           <p className="card-text">{content}</p>
-          <a href="#" className="btn btn-primary" onClick={callback}>remove</a>
-          <a href="#" className="btn btn-primary" onClick={callbackChangeTitle}>change title</a>
+          <div className="row">
+            <div className="col">
+              <a href="#" className="btn btn-primary" onClick={callback}>remove</a>
+              </div>
+            <div className="col">
+              <a href="#" className="btn btn-primary" onClick={callbackChangeTitle}>change title</a>
+            </div>
+          </div>
+          
+          
         </div>
       </div>
     </div>
