@@ -2,7 +2,7 @@ import { Row, Container } from "react-bootstrap";
 import style from "./Main.module.css";
 import { posts as originalPosts, createArr, lenguage } from "../../posts.js";
 import { PostCard } from "./PostCard.jsx";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import gto from "../../assets/gto2.jpg"
 
 let basePost = { //creiamo una variabile statica che ci servira da base per gli inserimenti
@@ -17,9 +17,11 @@ let basePost = { //creiamo una variabile statica che ci servira da base per gli 
 export default function Main() {
   const [formData, setFormData] = useState(basePost) //creiamo una varibile statica che ha come valore iniziale l'oggetto creato sopra
   const [posts, setPosts] = useState(originalPosts)
+
+  const [status, setStatus] = useState(false)
+
   //funzione che mi aggiorna i valori del form data al cambio degli input
   function changeHandler(event){
-    event.preventDefault();
     //creo una variabile per il valore da mettere nell'oggetto, se l'elemento che ha scatenato l'evento è  di tipo checkbox 
     //allora il valore andra a prendere il valore di checked altrimenti di value
 
@@ -49,6 +51,7 @@ export default function Main() {
   
     setPosts([...posts, newPost])//con set new arr vado a creare un array con i vecchi post piu quello nuovo
     setFormData(basePost)//riazzero i campi
+    setStatus(false)
   }
 
   function deletePost(postToDelete){ //function per eliminare un post
@@ -65,7 +68,18 @@ export default function Main() {
     console.log(posts)
     setPosts([...posts]) //setto la variabile posts con il nuovo post
   }
- 
+
+  function changeTagsArray(){
+    console.log("aldo, giovanni e giacomo")
+  }
+
+  useEffect(() => {
+    if(status){
+      alert("Status aggiornato")
+    }
+  }, [status])
+
+
   return (
     <div className={[style.bgcolor_lightGrey, style.flex_grow_1].join(" ")}>
       <Container>
@@ -79,26 +93,25 @@ export default function Main() {
               <input onChange={(e)=>changeHandler(e)} checked={formData.published} name='published' id="published" type="checkbox"/>
               <label htmlFor="published">disponibile?</label>
             </div>
-          
-          
-          {/*<div className="col-1">
-                <input onChange={changeHandler} checked={formData.published} type="checkbox" name='tags'className="btn-check" id="html" autoComplete="off"/>
+          <div className="row">
+          <div className="col-1">
+                <input onChange={changeTagsArray} checked={formData.published} type="checkbox" name='tags'className="btn-check" id="html" autoComplete="off"/>
                 <label className="btn btn-outline-primary" htmlFor="html">html</label>
             </div>
-            <div className="col-1">
-                <input onChange={changeHandler} checked={formData.published} type="checkbox" name='tags'className="btn-check" id="css" autoComplete="off"/>
-                <label className="btn btn-outline-primary" htmlFor="css">css</label>
-            </div>
-            <div className="col-1">
-                <input onChange={changeHandler} checked={formData.published} type="checkbox" name='tags'className="btn-check" id="js" autoComplete="off"/>
-                <label className="btn btn-outline-primary" htmlFor="js">js</label>
-            </div>
-            <div className="col-1">
-                <input type="checkbox" onChange={(e)=>changeHandler(e)} checked={formData.published} name='tags' id="php"className="btn-check" />
-                <label className="btn btn-outline-primary" htmlFor="php">php</label>
-            </div>*/}
-              
-            <input type="submit" className="col-1"></input>
+              <div className="col-1">
+                  <input onChange={changeTagsArray} checked={formData.published} type="checkbox" name='tags'className="btn-check" id="css" autoComplete="off"/>
+                  <label className="btn btn-outline-primary" htmlFor="css">css</label>
+              </div>
+              <div className="col-1">
+                  <input onChange={changeTagsArray} checked={formData.published} type="checkbox" name='tags'className="btn-check" id="js" autoComplete="off"/>
+                  <label className="btn btn-outline-primary" htmlFor="js">js</label>
+              </div>
+              <div className="col-1">
+                  <input type="checkbox" onChange={changeTagsArray} checked={formData.published} name='tags' id="php"className="btn-check" />
+                  <label className="btn btn-outline-primary" htmlFor="php">php</label>
+              </div>
+            </div>  
+            <input type="submit" className="col-1" onClick={()=>{setStatus(true)}}></input>
           </form>
         <Row
           className={[style.justify_center,style.align_center,style.padding_top_50,]}
