@@ -1,9 +1,8 @@
 import { Row, Container } from "react-bootstrap";
 import style from "./Main.module.css";
-import { posts as originalPosts, createArr, lenguage } from "../../posts.js";
+import { posts as originalPosts } from "../../posts.js";
 import { PostCard } from "./PostCard.jsx";
 import { useEffect, useState } from "react";
-import gto from "../../assets/gto2.jpg"
 
 let basePost = { //creiamo una variabile statica che ci servira da base per gli inserimenti
   id: 0,
@@ -62,11 +61,11 @@ export default function Main() {
         arr.push(el)
       }
     }
-    console.log(arr)
+    console.log(posts.length)
     //creo una variabile di appoggio dove andro a mettere i valori che ho preso dal form
     const newPost = {
-      id: posts.length + 1,
       ...formData,//uso lo spread operator per mettere i valori di form data dentro al nuovo post
+      id: posts.length + 1,
       tags: arr,
     }
   
