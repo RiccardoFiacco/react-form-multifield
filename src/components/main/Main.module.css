@@ -16,3 +16,7 @@
 .bgcolor_lightGrey{
     background-color: #E5E5E5;
 }
+
+.row_gap_15{
+    row-gap: 15px;
+}

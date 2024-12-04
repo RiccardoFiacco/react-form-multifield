@@ -131,7 +131,7 @@ export default function Main() {
             <input type="submit" className="col-1" onClick={()=>{setStatus(true)}}></input>
           </form>
         <Row
-          className={[style.justify_center,style.align_center,style.padding_top_50,]}
+          className={[style.justify_center,style.align_center,style.padding_top_50,style.row_gap_15]}
         >
           {posts.map((el) => {
             return (
